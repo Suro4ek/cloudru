@@ -1,0 +1,6 @@
+registry_url: "docker.io"
+registry_username: "suro4ek"
+registry_password: """
+
+app_author: "suro4ek"
+image: "suro4ek/cloudru:latest"

@@ -1,0 +1,23 @@
+---
+- name: Login registry
+  docker_login:
+    registry: "{{ registry_url }}"
+    username: "{{ registry_username }}"
+    password: "{{ registry_password }}"
+
+- name: Pull app image
+  docker_image:
+    name: "{{ image }}"
+    source: pull
+
+- name: Run app
+  docker_container:
+    name: "cloudru-{{ item }}"
+    image: "{{ image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "808{{ item }}:8080"
+    env: 
+      AUTHOR: "{{ app_author }}"
+  loop: [1, 2, 3]
